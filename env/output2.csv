@@ -1,21 +1,11 @@
-,Brand,Name,Type,ID,Composition,Time of Extraction,PageTitle,Price
-0,H&M,Sweatshorts,bottoms,879248001,"Cotton 60%, Polyester 40%",7/26/2020 14:04,Sweatshorts - Black - Ladies | H&M US,
-1,H&M,Cotton Jersey Cycling Shorts,bottoms,733803001,"Cotton 95%, Elastane 5%",7/26/2020 14:04,Cotton Jersey Cycling Shorts - Black - Ladies | H&M US,
-2,H&M,T-shirt with Printed Design,top,892970003,"Cotton 90%, Elastane 10%",7/26/2020 14:04,T-shirt with Printed Design - White/flowers - Ladies | H&M US,
-3,H&M,Ankle-length Slacks,other,783346001,"Cotton 62%, Polyester 35%, Elastane 3%",7/26/2020 14:04,Ankle-length Slacks - Black - Ladies | H&M US,
-4,H&M,Oversized Printed T-shirt,top,902140002,Cotton 100%,7/26/2020 14:04,Oversized Printed T-shirt - Black - Ladies | H&M US,
-5,H&M,Ankle-length Pull-on Pants,bottoms,845790006,"Pocket lining: Polyester 100%Polyester 58%, Viscose 27%, Polyamide 12%, Elastane 3%",7/26/2020 14:04,Ankle-length Pull-on Pants - Black/checked - Ladies | H&M US,
-6,H&M,Cotton Paper-bag Shorts,bottoms,859105003,Shell: Cotton 100%Pocket lining: Cotton 100%,7/26/2020 14:04,Cotton Paper-bag Shorts - Black - Ladies | H&M US,
-7,H&M,Calf-length Dress,dress,852374015,Viscose 100%,7/26/2020 14:04,Calf-length Dress - Light beige/floral - Ladies | H&M US,
-8,H&M,T-shirt,top,610776002,Cotton 100%,7/26/2020 14:04,T-shirt - Black - Ladies | H&M US,
-9,H&M,Hoodie,outterwear/jacket,715624050,"Cotton 60%, Polyester 40%",7/26/2020 14:04,Hoodie - Lavender - Ladies | H&M US,
-10,American Apparel,50/50 Classic Crewneck T-Shirt,top,bb301w,,7/26/2020 14:05,50/50 Classic Crewneck T-Shirt | American Apparel,n/a
-11,American Apparel,50/50 Classic Ringer T-Shirt,top,bb310w,,7/26/2020 14:05,50/50 Classic Ringer T-Shirt | American Apparel,n/a
-12,American Apparel,Basic Knit V Sweater,outterwear/jacket,kwc7dvw,"A timeless classic, our 100% Cotton sweater fabric is essential for layering.",7/26/2020 14:05,Basic Knit V Sweater | American Apparel,n/a
-13,American Apparel,Cotton 2x2 Long Sleeve Crewneck Dress,dress,ctw3585w,,7/26/2020 14:05,Cotton 2x2 Long Sleeve Crewneck Dress | American Apparel,n/a
-14,American Apparel,Cotton 2x2 U Back Bodysuit,bodysuit/romper,ctw3220w,,7/26/2020 14:05,Cotton 2x2 U Back Bodysuit | American Apparel,n/a
-15,American Apparel,Cotton Spandex Cross V Bodysuit,bodysuit/romper,rsa8328w,,7/26/2020 14:05,Cotton Spandex Cross V Bodysuit | American Apparel,n/a
-16,American Apparel,Cotton Spandex Deep Cut Bodysuit,bodysuit/romper,rsa83222w,,7/26/2020 14:05,Cotton Spandex Deep Cut Bodysuit | American Apparel,n/a
-17,American Apparel,Cotton Spandex Halter Bodysuit,bodysuit/romper,rsa8312w,,7/26/2020 14:05,Cotton Spandex Halter Bodysuit | American Apparel,n/a
-18,American Apparel,Cotton Spandex Jersey High-Waist Leggings,bottoms,rsa8349w,,7/26/2020 14:05,Cotton Spandex Jersey High-Waist Leggings | American Apparel,n/a
-19,American Apparel,Cotton Spandex Jersey High-Waist Leggings,bottoms,rsa8349w,,7/26/2020 14:05,Cotton Spandex Jersey High-Waist Leggings | American Apparel,n/a
+,Brand,Name,Type,ID,Time of Extraction,PageTitle,Price,Leather,Cotton,Polyester,Acrylic,Rayon,Modal,Spandex,Nylon,Polyamide,Viscose,Elastane,Linnen,Lyocell
+0,American Apparel,50/50 Classic Crewneck T-Shirt,top,bb301w,07/27/2020 17:19:50,50/50 Classic Crewneck T-Shirt | American Apparel,n/a,n/a,50% cotton , 50% polyester,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a
+1,American Apparel,50/50 Classic Ringer T-Shirt,top,bb310w,07/27/2020 17:19:58,50/50 Classic Ringer T-Shirt | American Apparel,n/a,n/a,50% cotton , 50% polyester,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a
+2,American Apparel,Basic Knit V Sweater,outterwear/jacket,kwc7dvw,07/27/2020 17:20:04,Basic Knit V Sweater | American Apparel,n/a,n/a,"a timeless classic, our 100% cotton sweater fabric is essential for layering.",n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a
+3,American Apparel,Cotton 2x2 Long Sleeve Crewneck Dress,dress,ctw3585w,07/27/2020 17:20:11,Cotton 2x2 Long Sleeve Crewneck Dress | American Apparel,n/a,n/a,95% cotton ,n/a,n/a,n/a,n/a, 5% spandex,n/a,n/a,n/a,n/a,n/a,n/a
+4,American Apparel,Cotton 2x2 U Back Bodysuit,bodysuit/romper,ctw3220w,07/27/2020 17:20:17,Cotton 2x2 U Back Bodysuit | American Apparel,n/a,n/a,95% cotton ,n/a,n/a,n/a,n/a, 5% spandex,n/a,n/a,n/a,n/a,n/a,n/a
+5,American Apparel,Cotton Spandex Cross V Bodysuit,bodysuit/romper,rsa8328w,07/27/2020 17:20:24,Cotton Spandex Cross V Bodysuit | American Apparel,n/a,n/a,92% cotton ,n/a,n/a,n/a,n/a, 8% spandex,n/a,n/a,n/a,n/a,n/a,n/a
+6,American Apparel,Cotton Spandex Deep Cut Bodysuit,bodysuit/romper,rsa83222w,07/27/2020 17:20:30,Cotton Spandex Deep Cut Bodysuit | American Apparel,n/a,n/a,92% cotton ,n/a,n/a,n/a,n/a, 8% spandex,n/a,n/a,n/a,n/a,n/a,n/a
+7,American Apparel,Cotton Spandex Halter Bodysuit,bodysuit/romper,rsa8312w,07/27/2020 17:20:37,Cotton Spandex Halter Bodysuit | American Apparel,n/a,n/a,92% cotton ,n/a,n/a,n/a,n/a, 8% spandex,n/a,n/a,n/a,n/a,n/a,n/a
+8,American Apparel,Cotton Spandex Jersey High-Waist Leggings,bottoms,rsa8349w,07/27/2020 17:20:43,Cotton Spandex Jersey High-Waist Leggings | American Apparel,n/a,n/a,92% cotton ,n/a,n/a,n/a,n/a, 8% spandex,n/a,n/a,n/a,n/a,n/a,n/a
+9,American Apparel,Cotton Spandex Jersey High-Waist Leggings,bottoms,rsa8349w,07/27/2020 17:20:50,Cotton Spandex Jersey High-Waist Leggings | American Apparel,n/a,n/a,92% cotton ,n/a,n/a,n/a,n/a, 8% spandex,n/a,n/a,n/a,n/a,n/a,n/a
