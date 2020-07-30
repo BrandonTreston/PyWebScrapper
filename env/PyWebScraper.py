@@ -6,6 +6,8 @@ from time import sleep
 from random import randint
 from datetime import datetime
 import pandas as pd
+import re
+
 
 class Scraper:
     def __init__(self):
@@ -99,7 +101,7 @@ class Scraper:
             #get the href attribute of each web element in elements
             self.links.append(href)
   
-    def scrape(self, brandName, nameSelector, idSelector, compositionSelector, compositionSplitBy, priceSelector, delay=5, function=()):
+    def scrape(self, brandName, nameSelector, idSelector, compositionSelector, priceSelector, delay=5, function=()):
         """Visits each link and scrapes the page using provided XPATH parameters.
 
         Parameters
@@ -112,8 +114,6 @@ class Scraper:
             String containing XPATH for the product id web element
         compositionSelector : str
             String containing XPATH for the composition web element
-        compositionSplitBy : str
-            String with the character that seperates the values of the composition, if exists.
         priceSelector : str
             String containing XPATH for the price web element
         delay : int (optional)
@@ -155,24 +155,13 @@ class Scraper:
                 if composition:
                     compStr = composition[0].text.lower()
                     self.compositionString.append(compStr)
-                    comp = compStr.split(compositionSplitBy)
-                    materialNames = ["leather", "cotton", "polyester", "acrylic", "rayon", "modal", "spandex", "nylon", "polyamide", "viscose", "elastane", "linnen", "lyocell"]
-                    #remove values that are not in materialNames.
-                    for i, each in enumerate(comp):
-                        for material in materialNames:
-                            if material in each:
-                                tempComp.append(comp[i])
-                                        
-                    #for each material in materialNames, check if it maches a material in the edidted composition string. If so, append it to the corresponding material in the primary datastore. else, append 'n/a'
-                    for position, material in enumerate(materialNames):
-                        if any(material in u for u in tempComp):
-                            index = [i for i, s in enumerate(tempComp) if material in s]
-                            self.composition[position].append(tempComp[index[0]])
+                    materials = ["leather", "cotton", "polyester", "acrylic", "rayon", "modal", "spandex", "nylon", "polyamide", "viscose", "elastane", "linnen", "lyocell"]
+                    for index, material in enumerate(materials):
+                        percentage = re.findall( '\d+\D (?=' + material + ')', compStr)
+                        if percentage:
+                            self.composition[index].append(percentage[0])
                         else:
-                            self.composition[position].append('n/a')
-                # if not tempComp:
-                #     for i, each in enumerate(composition):
-                #         self.composition[i].append('n/a')
+                        self.composition[index].append('n/a')
                 if title:
                     self.page_title.append(title)
                 self.extraction_time.append(datetime.now().strftime("%m/%d/%Y %H:%M:%S"))
@@ -217,19 +206,19 @@ class Scraper:
         print(self.page_title)
         print(self.price)
         print(self.compositionString)
-        # print(self.leather)
-        # print(self.cotton)        
-        # print(self.polyester)
-        # print(self.acrylic)
-        # print(self.rayon)
-        # print(self.modal)
-        # print(self.spandex)
-        # print(self.nylon)
-        # print(self.ployamide)
-        # print(self.viscose)
-        # print(self.elastane)
-        # print(self.linnen)
-        # print(self.lyocell)
+        print(self.leather)
+        print(self.cotton)        
+        print(self.polyester)
+        print(self.acrylic)
+        print(self.rayon)
+        print(self.modal)
+        print(self.spandex)
+        print(self.nylon)
+        print(self.ployamide)
+        print(self.viscose)
+        print(self.elastane)
+        print(self.linnen)
+        print(self.lyocell)
 
         """Create a dataframe for the data agregated by the scrape() method."""
         articles = pd.DataFrame({
@@ -242,19 +231,19 @@ class Scraper:
             'PageUrl': self.page_url,
             'Price': self.price,
             'Composition': self.compositionString,
-            # 'Leather': self.leather,
-            # 'Cotton': self.cotton,
-            # 'Polyester': self.polyester,
-            # 'Acrylic': self.acrylic,
-            # 'Rayon': self.rayon,
-            # 'Modal': self.modal,
-            # 'Spandex': self.spandex,
-            # 'Nylon': self.nylon,
-            # 'Polyamide': self.ployamide,
-            # 'Viscose': self.viscose,
-            # 'Elastane': self.elastane,
-            # 'Linnen': self.linnen,
-            # 'Lyocell': self.lyocell,
+            'Leather': self.leather,
+            'Cotton': self.cotton,
+            'Polyester': self.polyester,
+            'Acrylic': self.acrylic,
+            'Rayon': self.rayon,
+            'Modal': self.modal,
+            'Spandex': self.spandex,
+            'Nylon': self.nylon,
+            'Polyamide': self.ployamide,
+            'Viscose': self.viscose,
+            'Elastane': self.elastane,
+            'Linnen': self.linnen,
+            'Lyocell': self.lyocell,
         })
         articles.to_csv('output.csv')
 
@@ -290,7 +279,6 @@ scraper.scrape('H&M',
 '//h1[@class="primary product-item-headline"]',
 '//dl[@class="pdp-description-list"]/div/dt[text()="Art. No."]//following-sibling::dd',
 '//dl[@class="pdp-description-list"]/div/dt[text()="Composition"]//following-sibling::dd',
-',',
 '//span[@class="price-value"]'
 )
 
@@ -301,12 +289,11 @@ def closeAPPopUp():
         closeButton.click()
 
 scraper.setURL("https://americanapparel.com/women/?_bc_fsnf=1&Product+Type%5B%5D=Bodysuits&Product+Type%5B%5D=Camis&Product+Type%5B%5D=Cardigans&Product+Type%5B%5D=Dresses&Product+Type%5B%5D=Hoodies&Product+Type%5B%5D=Jackets&Product+Type%5B%5D=Jeans&Product+Type%5B%5D=Joggers&Product+Type%5B%5D=Jumpsuits&Product+Type%5B%5D=Leggings&Product+Type%5B%5D=Pants&Product+Type%5B%5D=Shorts&Product+Type%5B%5D=Skirts&Product+Type%5B%5D=Sweaters&Product+Type%5B%5D=Sweatshirts&Product+Type%5B%5D=T-Shirts")
-scraper.getProductLinks('//a[@class="plp-product-link"]',0, 20, function=closeAPPopUp, paginated=False, dynamic=True,)
+scraper.getProductLinks('//a[@class="plp-product-link"]',0, 250, function=closeAPPopUp, paginated=False, dynamic=True,)
 scraper.scrape('American Apparel',
 '//h1[@class="productView-title"]',
 '//dd[@class="productView-info-value"]',
 '//div[@class="product-fabric-details"]//div[2]//div[1]//p[2]',
-'/',
 '//div[@class="price-does-not-exist"]')
 
 #GAP
@@ -329,7 +316,6 @@ scraper.scrape('GAP',
 '//h1[@class="product-title__text"]',
 '//div[@id="product-info-tabs-panel--0"]/ul/li[last()]/span',
 '//div[@id="product-info-tabs-panel--1"]/ul/li[1]/span',
-',',
 '//div[@class="pdp-pricing"]/h2',
 3,
 triggerGapJS)
