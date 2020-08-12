@@ -70,7 +70,12 @@ class Scraper:
 
         #scroll to load dynamic content (does not work on every site. One example is GAP)
         if dynamic == True:
-            self.browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            i = 0
+            while i < 7000:
+                self.browser.execute_script("window.scrollBy(0,10);")
+                i += 1
+            self.browser.execute_script("window.scrollTo(0,0);")
+            sleep(5)
 
         if paginated == True:
             for page in range(0,pages):
@@ -134,6 +139,7 @@ class Scraper:
             _price = self.browser.find_elements(By.XPATH, priceSelector)
 
             #check if data exists after scraping, add it to data proper store if so
+            #TODO: array size check to see if these should do anything
             if link: self.page_url.append(link)
             if brandName:self.brand.append(brandName)
             if name:
@@ -141,20 +147,16 @@ class Scraper:
                     self.product_name.append(name[0].text)
                     #determine product type by its name
                     self.getType(name[0].text)
-                else:
-                    self.product_name.append('')
             if _id:
                 if _id[0].text != '':
                     self.product_id.append(_id[0].text)
-                else:
-                    self.product_id.append('')
             if _price:
                 if _price[0].text != '':
                     self.price.append(_price[0].text)
-                else:
-                    self.price.append('')
             if composition:
-                compStr = composition[0].text.lower()
+                compStr = ''
+                for index, item in enumerate(composition):
+                    compStr += composition[index].text.lower()
                 self.compositionString.append(compStr)
                 #for each item in materials, RegEx find '% + material name' and 'material name + %' then add to datastore. Order of the composition[] datastore MUST coincide with the order of the materials[] list.
                 for index, material in enumerate(materials):
@@ -195,7 +197,7 @@ class Scraper:
                 type = 'dress'
             elif 'romper' in productName or 'bodysuit' in productName or 'jump' in productName or 'suit' in productName or 'coverall' in productName:
                 type = 'bodysuit/romper'
-            elif 'bra' in productName or 'shoe' in productName or 'bag' in productName or 'bikini' in productName or 'flip' in productName or 'thong' in productName or 'belt' in productName or 'mask' in productName or 'hat' in productName or 'tote' in productName or 'scarf' in productName or 'slides' in productName or 'sock' in productName or 'sneaker' in productName or 'sandal' in productName or 'slip-on' in productName or 'pumps' in productName:
+            elif 'bra' in productName or 'shoe' in productName or 'boot' in productName or 'bag' in productName or 'bikini' in productName or 'flip' in productName or 'thong' in productName or 'belt' in productName or 'mask' in productName or 'hat' in productName or 'tote' in productName or 'scarf' in productName or 'slides' in productName or 'sock' in productName or 'sneaker' in productName or 'sandal' in productName or 'slip-on' in productName or 'pumps' in productName:
                 type = 'ignore'
             else:
                 type = 'other'
@@ -209,9 +211,9 @@ class Scraper:
         print(len(self.product_name))
         print(len(self.product_id))
         print(len(self.product_description))
+        print(len(self.price))
         print(len(self.extraction_time))
         print(len(self.page_title))
-        print(len(self.price))
         print(len(self.compositionString))
         print(len(self.leather))
         print(len(self.cotton))

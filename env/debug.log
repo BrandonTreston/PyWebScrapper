@@ -2,3 +2,18 @@
 [0716/222538.615:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
 [0716/222833.100:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
 [0716/222919.072:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
+[0801/204108.821:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
+[0802/012646.915:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0802/012646.916:ERROR:exception_snapshot_win.cc(98)] thread ID 14176 not found in process
+[0802/012646.939:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0802/012646.939:ERROR:exception_snapshot_win.cc(98)] thread ID 14096 not found in process
+[0803/041729.326:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0803/041729.327:ERROR:exception_snapshot_win.cc(98)] thread ID 15252 not found in process
+[0803/041729.346:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0803/041729.347:ERROR:exception_snapshot_win.cc(98)] thread ID 17060 not found in process
+[0803/041729.347:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[0803/194419.513:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0803/194419.514:ERROR:exception_snapshot_win.cc(98)] thread ID 1196 not found in process
+[0810/175726.148:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0810/221713.599:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0810/221713.600:ERROR:exception_snapshot_win.cc(98)] thread ID 10316 not found in process
