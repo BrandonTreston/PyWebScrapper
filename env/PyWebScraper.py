@@ -102,7 +102,7 @@ class Scraper:
         for href in elements:
             self.links.append(href)
   
-    def scrape(self, brandName, nameSelector, idSelector, compositionSelector, priceSelector, delay=5, function=()):
+    def scrape(self, brandName, nameSelector, idSelector, compositionSelector, priceSelector, delay=5, function=(), doName= True, doId= True, doComposition= True, doPrice= True):
         """Visits each link and scrapes the page using provided XPATH parameters.
 
         Parameters
@@ -122,6 +122,14 @@ class Scraper:
         function : method (option)
             Executes before data is scraped. Lets user pass a method to the scraper if additional instructions are needed to access
             page data. Ex. lets user use XPATH code and selenium to trigger javascript to render elements with desired data to the DOM.
+        doName : bool (optional)
+            tells the scraper to not scrape for product name in the event that the name is obscured on the page and must be handeled by a secondary function. Default is True
+        doId : bool (optional)
+            tells the scraper to not scrape for product id in the event that the id is obscured on the page and must be handeled by a secondary function. Default is True
+        doComposition : bool (optional)
+            tells the scraper to not scrape for product composition in the event that the composition is obscured on the page and must be handeled by a secondary function. Default is True
+        doPrice : bool (optional)
+            tells the scraper to not scrape for product price in the event that the price is obscured on the page and must be handeled by a secondary function. Default is True
         """
         for link in self.links:
             self.browser.get(link)
@@ -130,7 +138,6 @@ class Scraper:
             
             if function:
                 function() #trigger additional JS, like click a menu button to make content appear
-
             #scrape web elements containing desired data: temporary storage
             name = self.browser.find_elements(By.XPATH, nameSelector)
             _id = self.browser.find_elements(By.XPATH, idSelector)
@@ -142,39 +149,44 @@ class Scraper:
             #TODO: array size check to see if these should do anything
             if link: self.page_url.append(link)
             if brandName:self.brand.append(brandName)
-            if name:
-                if name[0].text != '':
+            if doName:
+                if name:
                     self.product_name.append(name[0].text)
                     #determine product type by its name
                     self.getType(name[0].text)
-            if _id:
-                if _id[0].text != '':
+                else:
+                    self.product_name.append(' ')
+                    self.product_description.append(' ')
+            if doId:
+                if _id:
                     self.product_id.append(_id[0].text)
-            if _price:
-                if _price[0].text != '':
+                else: self.product_id.append(' ')
+            if doPrice:
+                if _price:
                     self.price.append(_price[0].text)
-            if composition:
-                compStr = ''
-                for index, item in enumerate(composition):
-                    compStr += composition[index].text.lower()
-                self.compositionString.append(compStr)
-                #for each item in materials, RegEx find '% + material name' and 'material name + %' then add to datastore. Order of the composition[] datastore MUST coincide with the order of the materials[] list.
-                for index, material in enumerate(materials):
-                    percentage = re.findall( '\d+\D (?=' + material + ')', compStr)
-                    percentage2= re.findall('(?<=' + material + ') \d+\D', compStr)
-                    if percentage:
-                        self.composition[index].append(percentage[0])
-                    elif percentage2:
-                        self.composition[index].append(percentage2[0].strip())
-                    else:
+                else: self.price.append(' ')
+            if doComposition:
+                if composition:
+                    compStr = ''
+                    for index, item in enumerate(composition):
+                        compStr += composition[index].text.lower()
+                    self.compositionString.append(compStr)
+                    #for each item in materials, RegEx find '% + material name' and 'material name + %' then add to datastore. Order of the composition[] datastore MUST coincide with the order of the materials[] list.
+                    for index, material in enumerate(materials):
+                        percentage = re.findall( '\d+\D (?=' + material + ')', compStr)
+                        percentage2= re.findall('(?<=' + material + ') \d+\D', compStr)
+                        if percentage:
+                            self.composition[index].append(percentage[0])
+                        elif percentage2:
+                            self.composition[index].append(percentage2[0].strip())
+                        else:
+                            self.composition[index].append(' ')
+                else:
+                    self.compositionString.append(' ')
+                    for index, material in enumerate(materials):
                         self.composition[index].append(' ')
-            else:
-                self.compositionString.append(' ')
-                for index, material in enumerate(materials):
-                    self.composition[index].append(' ')
             if title: self.page_title.append(title)
             self.extraction_time.append(datetime.now().strftime("%m/%d/%Y %H:%M:%S"))
-
 
     def getType(self, productInput):
         """Checks product name for keywords to determine basic article type.
@@ -203,7 +215,6 @@ class Scraper:
                 type = 'other'
             self.product_description.append(type)
             self.clearLinks()
-            
 
     def processData(self, filename):
         # For Debug
@@ -272,6 +283,7 @@ class Scraper:
         """
         self.url = url
         self.browser.get(url)
+        self.browser.maximize_window()
         sleep(1)
 
     def exit(self):

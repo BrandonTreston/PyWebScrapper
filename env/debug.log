@@ -17,3 +17,9 @@
 [0810/175726.148:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
 [0810/221713.599:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
 [0810/221713.600:ERROR:exception_snapshot_win.cc(98)] thread ID 10316 not found in process
+[0814/081825.702:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0814/081825.704:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0814/081825.704:ERROR:exception_snapshot_win.cc(98)] thread ID 1940 not found in process
+[0814/145702.191:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
+[0814/235457.923:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0815/000348.804:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
