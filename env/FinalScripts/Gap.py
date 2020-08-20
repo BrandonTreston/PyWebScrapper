@@ -5,7 +5,7 @@ scraper = Scraper()
 
 # GAP
 def closeGapPopUp():
-    closePopUpButton = scraper.browser.find_elements(By.XPATH, '//button[@class="css-1qosac6"]')
+    closePopUpButton = scraper.browser.find_elements(By.XPATH, '//button[@aria-label="close email sign up modal"]')
     if closePopUpButton:
         closePopUpButton[0].click()
     js_string = "document.getElementById('promoBannerMain').remove();"
@@ -20,6 +20,9 @@ def closeGapPopUp():
     scraper.browser.execute_script("arguments[0].scrollIntoView();", offset)
 
 def triggerGapJS():
+    checkPopUp = scraper.browser.find_elements(By.XPATH, '//button[@aria-label="close email sign up modal"]')
+    if checkPopUp:
+        checkPopUp[0].click()
     js_string = "document.getElementById('promoBannerMain').remove();"
     scraper.browser.execute_script(js_string)
     sleep(1)

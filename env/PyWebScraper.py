@@ -22,7 +22,7 @@ class Scraper:
         self.page_title = []
         self.extraction_time = []
         self.page_url = []
-        # product composition storage
+        #product composition storage
         self.cotton = []
         self.leather = []
         self.polyester = []
@@ -72,10 +72,10 @@ class Scraper:
         if dynamic == True:
             i = 0
             while i < 7000:
-                self.browser.execute_script("window.scrollBy(0,10);")
+                self.browser.execute_script("window.scrollBy(0,10);") #scroll by 10px
                 i += 1
-            self.browser.execute_script("window.scrollTo(0,0);")
-            sleep(5)
+            self.browser.execute_script("window.scrollTo(0,0);") #scroll to top
+            sleep(4)
 
         if paginated == True:
             for page in range(0,pages):
@@ -146,7 +146,6 @@ class Scraper:
             _price = self.browser.find_elements(By.XPATH, priceSelector)
 
             #check if data exists after scraping, add it to data proper store if so
-            #TODO: array size check to see if these should do anything
             if link: self.page_url.append(link)
             if brandName:self.brand.append(brandName)
             if doName:
@@ -171,8 +170,26 @@ class Scraper:
                     for index, item in enumerate(composition):
                         compStr += composition[index].text.lower()
                     self.compositionString.append(compStr)
-                    #for each item in materials, RegEx find '% + material name' and 'material name + %' then add to datastore. Order of the composition[] datastore MUST coincide with the order of the materials[] list.
+                    self.sort(compStr)
+                else:
+                    self.compositionString.append(' ')
                     for index, material in enumerate(materials):
+                        self.composition[index].append(' ')
+            if title: self.page_title.append(title)
+            else: self.page_title.append(" ")
+            self.extraction_time.append(datetime.now().strftime("%m/%d/%Y %H:%M:%S"))
+
+    def sort(self, compStr):
+        """Sorts the composition string for each product into columns.
+
+        Parameters
+        ----------
+        compStr : str
+            The string containting the text content of a produt's composition
+        """
+        #for each item in materials, RegEx find '% + material name' and 'material name + %' then add to datastore. Order of the composition[] datastore MUST coincide with the order of the materials[] list.
+        materials = ["leather", "cotton", "polyester", "acrylic", "rayon", "modal", "spandex", "nylon", "polyamide", "viscose", "elastane", "linen", "lyocell"]
+        for index, material in enumerate(materials):
                         percentage = re.findall( '\d+\D (?=' + material + ')', compStr)
                         percentage2= re.findall('(?<=' + material + ') \d+\D', compStr)
                         if percentage:
@@ -181,12 +198,6 @@ class Scraper:
                             self.composition[index].append(percentage2[0].strip())
                         else:
                             self.composition[index].append(' ')
-                else:
-                    self.compositionString.append(' ')
-                    for index, material in enumerate(materials):
-                        self.composition[index].append(' ')
-            if title: self.page_title.append(title)
-            self.extraction_time.append(datetime.now().strftime("%m/%d/%Y %H:%M:%S"))
 
     def getType(self, productInput):
         """Checks product name for keywords to determine basic article type.
@@ -281,9 +292,9 @@ class Scraper:
         url : str
             the string of the url to navigate to.
         """
+        self.browser.maximize_window()
         self.url = url
         self.browser.get(url)
-        self.browser.maximize_window()
         sleep(1)
 
     def exit(self):

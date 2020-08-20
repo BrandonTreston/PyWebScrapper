@@ -7,10 +7,12 @@ scraper = Scraper()
 def triggerOldNavyJS():
     js_string = "document.getElementById('promoBannerMain').remove();"
     scraper.browser.execute_script(js_string)
+    js_string2 = "document.getElementsByClassName('brand-bar')[0].remove();"
+    scraper.browser.execute_script(js_string2)
     sleep(1)
     price = scraper.browser.find_elements(By.XPATH, '//div[@class="pdp-pricing"]//h2')
     if price: scraper.price.append(price[0].text)
-    else: scraper.product_description.append(' ')
+    else: scraper.price.append(' ')
     name = scraper.browser.find_elements(By.XPATH, '//h1[@class="product-title__text"]')
     if name: 
         scraper.product_name.append(name[0].text)

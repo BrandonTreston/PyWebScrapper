@@ -8,7 +8,11 @@ def closeF21Popup():
     sleep(11) #wait for popup
     button = scraper.browser.find_elements(By.XPATH, '//button[@aria-label="Decline Offer; close the dialog"]')
     if button:
-        button[0].click()
+        try:
+            button[0].click()
+        except:
+            print('no button to close')
+
 
 scraper.setURL('https://www.forever21.com/us/shop/catalog/category/f21/app-main')
 scraper.getProductLinks('//a[@class="item_slider product_link"]', buttonSelector='//span[@class="p_next"]', paginated=True, productCount=250, pages=5, function=closeF21Popup )
