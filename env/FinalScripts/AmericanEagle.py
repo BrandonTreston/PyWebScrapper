@@ -7,8 +7,10 @@ scraper = Scraper()
 # american eagle
 def closeAEPopup():
     button = scraper.browser.find_elements(By.XPATH, '//button[@class="btn-link btn-block clickable reject-cookie-modal-ccpa qa-reject-cookie-modal-ccpa ccpa-accessibility"]')
-    if button:
-        button[0].click()
+    try:
+        if button:
+            button[0].click()
+    except:print('button error')
         
 pages = ['https://www.ae.com/us/en/c/women/bottoms/jeans/cat6430042?pagetype=plp',
 'https://www.ae.com/us/en/c/women/bottoms/joggers-sweatpants/cat7010091?pagetype=plp',

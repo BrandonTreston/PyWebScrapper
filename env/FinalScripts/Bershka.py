@@ -6,9 +6,12 @@ scraper = Scraper()
 # Bershka
 def bershkaJS():
     button = scraper.browser.find_elements(By.XPATH, '//li[@id="compositionLink"]/span[@class="product-description-moreinfo-text"]')
-    if button:
-        button[0].click()
-        sleep(2)
+    try:
+        if button:
+            button[0].click()
+            sleep(2)
+    except:
+        print('button error')
 
 def showMoreProducts():
     button= scraper.browser.find_elements(By.XPATH, '//div[@class="grid-size-selector"]/ul/li[@class="view-6-link greyHover view-element"]/a[@class="view-element-link"]')
