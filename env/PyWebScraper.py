@@ -44,7 +44,6 @@ class Scraper:
     #load dynamic content by scrolling to bottom of page    
     def getProductLinks(self, productSelector, pages=0, productCount=250, buttonSelector='', function=(), paginated=False, dynamic=False):
         """Gets a list of all web elements containing links to the individual product pages
-
         Parameters
         ----------
         productSelector : str
@@ -64,14 +63,14 @@ class Scraper:
             if true, tells scraper to scroll to bottom of page to load dynamic content
         """
         elements = [] #temporary storage
-        sleep(3) #wait for popups
+        sleep(5) #wait for popups
         if function:
             function() #trigger additional js on a page, like close a popup for example.
 
         #scroll to load dynamic content (does not work on every site. One example is GAP)
         if dynamic == True:
             i = 0
-            while i < 7000:
+            while i < 7000:  #7000 is arbitrary, just to get enough items on screen to scrape. Exact number of items not important.
                 self.browser.execute_script("window.scrollBy(0,10);") #scroll by 10px
                 i += 1
             self.browser.execute_script("window.scrollTo(0,0);") #scroll to top
@@ -104,7 +103,6 @@ class Scraper:
   
     def scrape(self, brandName, nameSelector, idSelector, compositionSelector, priceSelector, delay=5, function=(), doName= True, doId= True, doComposition= True, doPrice= True):
         """Visits each link and scrapes the page using provided XPATH parameters.
-
         Parameters
         ----------
         brandName : str
@@ -138,6 +136,7 @@ class Scraper:
             
             if function:
                 function() #trigger additional JS, like click a menu button to make content appear
+
             #scrape web elements containing desired data: temporary storage
             name = self.browser.find_elements(By.XPATH, nameSelector)
             _id = self.browser.find_elements(By.XPATH, idSelector)
@@ -181,7 +180,6 @@ class Scraper:
 
     def sort(self, compStr):
         """Sorts the composition string for each product into columns.
-
         Parameters
         ----------
         compStr : str
@@ -193,15 +191,14 @@ class Scraper:
                         percentage = re.findall( '\d+\D (?=' + material + ')', compStr)
                         percentage2= re.findall('(?<=' + material + ') \d+\D', compStr)
                         if percentage:
-                            self.composition[index].append(percentage[0])
+                            self.composition[index].append('/'.join(percentage))    #if more than one percentage per material, seperate by '/' ie. shell :100% cotton, exterior: 100% cotton.
                         elif percentage2:
-                            self.composition[index].append(percentage2[0].strip())
+                            self.composition[index].append('/'.join(percentage2))
                         else:
                             self.composition[index].append(' ')
 
     def getType(self, productInput):
         """Checks product name for keywords to determine basic article type.
-
         Parameters
         ----------
         productInput : str
@@ -228,29 +225,6 @@ class Scraper:
             self.clearLinks()
 
     def processData(self, filename):
-        # For Debug
-        print(len(self.brand))
-        print(len(self.product_name))
-        print(len(self.product_id))
-        print(len(self.product_description))
-        print(len(self.price))
-        print(len(self.extraction_time))
-        print(len(self.page_title))
-        print(len(self.compositionString))
-        print(len(self.leather))
-        print(len(self.cotton))
-        print(len(self.polyester))
-        print(len(self.acrylic))
-        print(len(self.rayon))
-        print(len(self.modal))
-        print(len(self.spandex))
-        print(len(self.nylon))
-        print(len(self.ployamide))
-        print(len(self.viscose))
-        print(len(self.elastane))
-        print(len(self.linen))
-        print(len(self.lyocell))
-
         """Create a dataframe for the data agregated by the scrape() method.
         
         parameters
@@ -286,7 +260,6 @@ class Scraper:
 
     def setURL(self, url):
         """Set the url of the initial catalog page, get it in browser and let load for 4 seconds.
-
         Parameters
         ----------
         url : str

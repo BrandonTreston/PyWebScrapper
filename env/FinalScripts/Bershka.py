@@ -31,13 +31,13 @@ pages = ['https://www.bershka.com/us/women/collection/pants-c1010193216.html',
 
 for page in pages:
     scraper.setURL(page)
-    scraper.getProductLinks('//div[@class="image"]/a', productCount= 30, dynamic=True, function=showMoreProducts)
+    scraper.getProductLinks('//div/a[@class="grid-card-link"]', productCount= 30, dynamic=True, function=showMoreProducts)
 scraper.scrape(
     'Bershka',
-    '//h1[@class="product-description-name"]',
-    '//div[@class="product-info-elements"]/p[@class="product-detail-reference"]',
-    '//div[@id="modal"]/div/div/div[@class="composition-by-zone-container"][1]/div[@class="composition-by-zone-compositions"]/p',
-    '//span[@class="product-price prices"]/span',
+    '//h1[@class="product-title"]',
+    '//div[@class="product-reference"]',
+    '//section[@class="about-product"]/section[@class="product-compositions"]',
+    '//div[@class="current-price-elem"]',
     function = bershkaJS,
     delay= 15)
 

@@ -5,7 +5,7 @@ scraper = Scraper()
 
 # GAP
 def closeGapPopUp():
-    closePopUpButton = scraper.browser.find_elements(By.XPATH, '//button[@aria-label="close email sign up modal"]')
+    closePopUpButton = scraper.browser.find_elements(By.XPATH, '//button[@class="css-1qosac6"]')
     if closePopUpButton:
         closePopUpButton[0].click()
     js_string = "document.getElementById('promoBannerMain').remove();"
@@ -20,7 +20,7 @@ def closeGapPopUp():
     scraper.browser.execute_script("arguments[0].scrollIntoView();", offset)
 
 def triggerGapJS():
-    checkPopUp = scraper.browser.find_elements(By.XPATH, '//button[@aria-label="close email sign up modal"]')
+    checkPopUp = scraper.browser.find_elements(By.XPATH, '//button[@class="css-1qosac6"]')
     if checkPopUp:
         checkPopUp[0].click()
     js_string = "document.getElementById('promoBannerMain').remove();"
@@ -48,7 +48,7 @@ def triggerGapJS():
     sleep(1)
 
 scraper.setURL('https://www.gap.com/browse/category.do?cid=1127938#pageId=0&department=136&nav=leftnav:women:categories')
-scraper.getProductLinks('//div[@class="product-card"]/a[@class="product-card__link"]', pages=1, productCount=300, buttonSelector='//nav[@class="css-1l418ga-Paginator"]/button[@aria-label="Next Page"]', function=closeGapPopUp, paginated=True)
+scraper.getProductLinks('//div[@class="product-card"]/a[@class="product-card__link"]', pages=1, productCount=600, buttonSelector='//button[@aria-label="Next Page"]', function=closeGapPopUp, paginated=True)
 scraper.scrape('GAP',
 '//h1[@class="product-title__text"]',
 '//div[@id="product-info-tabs-panel--0"]/ul/li[last()]/span',

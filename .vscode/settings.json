@@ -9,7 +9,7 @@
     "python.testing.pytestEnabled": false,
     "python.testing.nosetestsEnabled": false,
     "python.testing.unittestEnabled": false,
-    "python.pythonPath": "c:\\Users\\brand\\Desktop\\PyWebScrapper\\env\\Scripts\\python.exe",
+    "python.pythonPath": "C:\\Users\\brand\\.virtualenvs\\WebScraper-Dv4odKFz\\Scripts\\python.exe",
     "python.testing.promptToConfigure": false,
     "git.ignoreLimitWarning": true
 }

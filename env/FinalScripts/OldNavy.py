@@ -41,7 +41,7 @@ pages = ["https://oldnavy.gap.com/browse/category.do?cid=72091&mlink=5360,1,W_fl
 ]
 for page in pages:
     scraper.setURL(page)
-    scraper.getProductLinks('//div[@class="product-card"]/div/div[@class="product-card__image-wrapper"]/a', productCount=75, dynamic=True)
+    scraper.getProductLinks('//div[@class="product-card__image-wrapper"]/a', productCount=75, dynamic=True)
 scraper.scrape('Old Navy',
 '//h1[@class="product-title__text"]',
 '//div[@id="product-info-tabs-panel--0"]/ul/li[last()]/span',
